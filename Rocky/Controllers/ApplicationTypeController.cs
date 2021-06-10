@@ -24,6 +24,7 @@ namespace Rocky.Controllers
         }
 
         //GET - CREATE
+        [HttpGet]
         public IActionResult Create()
         {
             return View();

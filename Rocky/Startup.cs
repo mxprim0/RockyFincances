@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.OpenApi.Models;
 
 namespace Rocky
 {
@@ -28,6 +29,16 @@ namespace Rocky
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(
                 Configuration.GetConnectionString("DefaultConnection")));
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSwaggerGen(c =>
+            {
+                //The generated Swagger JSON file will have these properties.
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Swagger XML Api Demo",
+                    Version = "v1",
+                });
+            });
 
             services.AddControllersWithViews();
         }
@@ -35,6 +46,18 @@ namespace Rocky
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("44393/index.html/swagger/v1/swagger.json", "Rocky");
+            //http://localhost:<port>/<route_prefix>/swagger/v1/swagger.json
+                //c.RoutePrefix = string.Empty;
+            });
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -54,9 +77,10 @@ namespace Rocky
 
             app.UseEndpoints(endpoints =>
             {
+                //endpoints.MapControllers();
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                   name: "default",
+                   pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

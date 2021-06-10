@@ -9,7 +9,9 @@ using Rocky.Models;
 
 namespace Rocky.Controllers
 {
-    [Authorize(Roles = WC.AdminRole)]
+    //[Authorize(Roles = WC.AdminRole)]
+    [ApiController]
+    [Route("Category")]
     public class CategoryController : Controller
     {
         private readonly ApplicationDbContext _db;
@@ -28,6 +30,7 @@ namespace Rocky.Controllers
 
 
         //GET - CREATE
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
@@ -51,6 +54,7 @@ namespace Rocky.Controllers
 
 
         //GET - EDIT
+        [HttpPut]
         public IActionResult Edit(int? id)
         {
             if (id == null || id == 0)
@@ -82,6 +86,7 @@ namespace Rocky.Controllers
         }
 
         //GET - DELETE
+        [HttpDelete]
         public IActionResult Delete(int? id)
         {
             if (id == null || id == 0)
