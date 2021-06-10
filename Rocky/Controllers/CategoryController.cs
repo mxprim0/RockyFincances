@@ -9,9 +9,6 @@ using Rocky.Models;
 
 namespace Rocky.Controllers
 {
-    //[Authorize(Roles = WC.AdminRole)]
-    [ApiController]
-    [Route("Category")]
     public class CategoryController : Controller
     {
         private readonly ApplicationDbContext _db;
