@@ -51,7 +51,6 @@ namespace Rocky.Controllers
 
 
         //GET - EDIT
-        [HttpPut]
         public IActionResult Edit(int? id)
         {
             if (id == null || id == 0)
@@ -83,7 +82,6 @@ namespace Rocky.Controllers
         }
 
         //GET - DELETE
-        [HttpDelete]
         public IActionResult Delete(int? id)
         {
             if (id == null || id == 0)
