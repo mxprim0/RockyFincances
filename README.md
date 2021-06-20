@@ -15,15 +15,47 @@ git clone https://github.com/dan-primo/RockyFincances.git
 
 2. Abra o arquivo de solução do projeto chamado Rocky.sln
 
-3. Carregue as dependências e restaure os pacotes
+3. Recompile a Solução do projeto, pode ser pelo atalho Ctrl + Alt + F7
 
-4. Faça a conexão com algum banco de dados local, alterando o endereço da "DefaultConnection" para sua conexão local no arquivo appsettings.json
+4. Faça a conexão com algum banco de dados local, alterando o endereço da "DefaultConnection" para sua conexão local no arquivo appsettings.json:
+``
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server= Insira aqui o nome do enderço do seu servidor local;Database=Rocky;Trusted_Connection=True;MultipleActiveResultSets=True"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "AllowedHosts": "*"
+}
+``
 
-5. Rode as migrations pelo terminal e atualize o banco de dados.
+5. Restaure os pacotes NuGet da Solução:
+Pelo CLI: 
+``
+dotnet restore
+``
+Pelo CLI do Nuget: 
+``
+nuget restore Rocky.sln
+``
+
+6. Execute as migrations do projeto para restaurar as tabelas do banco de dados:
+Abra o Console do Gerenciador de Pacotes e rode o comando:
+``
+update-database
+``
+Para verificar se deu certo você pode abrir o SQL Server Object Explorer e verificar se o banco de dados "Rocky" consta na lista de Databases local.
+
+7. Por fim, recompile a solução: Crtl + Alt + F7 e em seguida execute a solução Rocky.sln 
 
 ### Tecnologias utilizadas:
 
 * Dotnet 5.0
 * SQL Server
 * EntityFrameworkCore
-* SwaggerUI
+* SwaggerUI (branch swagger, em construção)
